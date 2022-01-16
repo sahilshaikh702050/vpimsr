@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+//  styles for form***************
+form {border: 3px solid red;width:50.5%;}
+
+input[type=text], input[type=email],textarea, select {
+  
+  font-size:15px;
+  padding: 12px 20px;
+size:auto;
+  margin:auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+}
+
+button {
+  background-color: Blue;
+  color: White;
+  padding: 14px 20px;
+    margin:auto;
+  border: 2px solid yellow;
+border-radius:25%;
+  cursor: pointer;
+  width: auto;
+
+	
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 20%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+.logo
+{
+margin-left:200px;
+}
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .menu, .main, .right {
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+<form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off"> 
+
+<!--<img src="logovp.jpg" class="logo" style="width:20%;">-->
+<br><br>
+<h2 style="margin-left:280px; color:Blue">ENQUIRY FORM</h2>
+<table align="center" border="4">
+<tr>
+<td>Enter Name:</td><td><input id="nameField" name="entry.986107968" placeholder="Enter your name" type="text"  required> </td>
+</tr>
+<tr>
+<td>Enter Email:</td>
+<td><input id="emailField" name="entry.923303819" placeholder="Enter your email" type="email" > </td>
+</tr>
+<tr>
+<td>Enter Mobile No:</td>
+<td><input id="mobField" name="entry.591686595" placeholder="Enter your 10 Digit Number"  type="text" pattern="^\d{10}$" required>  </td>
+</tr>
+<tr>
+<td>Enter Residential Address:</td>
+<td><textarea id="AddressField" name="entry.1054100743" placeholder="Enter your Address" rows="2" cols="22" required> </textarea> </td>
+</tr>
+<tr>
+<td>Select Course Interested:</td>
+<td><select id="courseField" name="entry.211215517" placeholder="Select Course" required>
+
+<option value="MCA">MCA</option>
+<option value="MBA">MBA</option>
+<option value="Mcom">Mcom</option> 
+<option value="DIT">DIT</option> 
+<option value="DBM">DBM</option> 
+<option value="BBA">BBA</option>
+<option value="BCA">BCA</option>
+<option value="BCA">PGDCA</option>
+</select> 
+</td>
+</tr>
+<tr>
+<td>Description:</td>
+<td><textarea id="DescriptionField" name="entry.1860997514" placeholder="Write your query here...." rows="2" cols="22" required> </textarea> </td>
+</tr>
+<tr>
+<th colspan="2">
+<button id="send" type="submit" class="common_btn">Submit Now</button>
+</th></tr>
+</table><br>
+<!--
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="admissionvp.html" target="_blank">For More Details Click Here...</a>
+-->
+</form>
+
+
+
+<!--   ***********ADMISSION FORM SCRIPT START HERE****** -->
+
+
+<h4 id="success-msg" style="text-align: center !important; margin-top:190px !important; display:none; color:BLACK"> THANK YOU!! We will Get Back You Very Soon!!</h4>
+
+
+<script>
+function postToGoogle() {
+                var field1 = $("#nameField").val();
+                var field2 = $("#emailField").val();
+                var field3 = $("#mobField").val();
+				var field4 = $("#AddressField").val();
+                var field5 = $("#courseField option:selected").text();
+ 				var field6 = $("#DescriptionField").val();
+				if(field1 == ""){
+					alert('Please Fill Your Name');
+					document.getElementById("nameField").focus();
+					return false;
+				}
+				/*if(field2 == ""){
+					alert('Please Fill Your Email');
+					document.getElementById("emailField").focus();
+					return false;
+				}*/
+				
+				if(field3 == "" || field3.length > 10 || field3.length < 10){
+					alert('Please Fill Your Mobile Number');
+					document.getElementById("mobField").focus();
+					return false;
+				}
+				if(field4 == ""){
+					alert('Please Fill Your Address');
+					document.getElementById("AddressField").focus();
+					return false;
+				}
+
+
+				
+	
+                $.ajax({
+                    url: "https://docs.google.com/forms/d/e/1FAIpQLSdqV3czVaOS2abevdr57LTfBe-BQ_wkSq0sQAwkscNZTQMdBQ/formResponse?",
+					data: {"entry.986107968": field1, "entry.923303819": field2, "entry.591686595": field3, "entry.1054100743": field4, "entry.211215517": field5,"entry.1860997514":field6},
+                    type: "POST",
+                    dataType: "xml",
+                    success: function(d)
+					{
+					},
+					error: function(x, y, z)
+						{
+
+							$('#success-msg').show();
+							$('#form').hide();
+							
+						}
+                });
+alert("Thank you for Information!!")
+
+				return false;
+            }
+</script>
+
+</body>
+</html>
